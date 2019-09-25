@@ -31,7 +31,7 @@ class ShopList extends Component {
 		if(!shopList.length) return null;
 		return _.map(shopList, shop => {
 			return (
-                <ListItem button key={shop.idshop} component="a" href={'/menu/' + shop.idshop + '/' + shop.shop_name}>
+                <ListItem button key={shop.idshop} component="a" onClick={() => this.props.history.push('/menu/' + shop.idshop) } >
                     <ListItemText primary={shop.shop_name} />
                     <ListItemSecondaryAction>
                         <button
