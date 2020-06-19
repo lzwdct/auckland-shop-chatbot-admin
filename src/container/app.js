@@ -13,7 +13,7 @@ export default class App extends Component {
         <div className="App" style={style.app}>
           <Switch>
             <Route path="/login" component={Login} />
-            <Route path="/menu/:id/:name" component={MenuList} />
+            <Route path="/menu/:id" component={MenuList} />
             <Route path="/edit/:id" component={EditShop} />
             <Route exact path="/" component={Main} />
           </Switch>
