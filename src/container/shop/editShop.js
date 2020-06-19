@@ -26,7 +26,8 @@ class EditShop extends Component {
             snack_open: false
         };
     }
-    UNSAFE_componentWillMount() {
+    componentDidMount() {
+
         this.props.fetchShopDetail(this.props.match.params.id);
     }
     edit_shop(e) {

@@ -17,8 +17,9 @@ class ShopList extends Component {
 			id : 0
 		}
     }
-    UNSAFE_componentWillMount(){
-        this.props.getShopList();
+    componentDidMount(){
+        if(this.props.shopList.length === 0)
+            this.props.getShopList();
     }
     delete_shop(id){
 		this.props.open();
@@ -26,9 +27,9 @@ class ShopList extends Component {
 			id
 		});
 	}
-    renderShop(){
-        const { shopList } = this.props;
-		if(!shopList.length) return null;
+    renderShop(shopList){
+
+        if(!shopList.length) return null;
 		return _.map(shopList, shop => {
 			return (
                 <ListItem button key={shop.idshop} component="a" href={'/menu/' + shop.idshop + '/' + shop.shop_name}>
@@ -53,7 +54,7 @@ class ShopList extends Component {
 	}
     render() {
         const { shopList } = this.props;
-        
+
         return (
             <div>
                 {
@@ -63,7 +64,7 @@ class ShopList extends Component {
                     shopList.length > 0 &&
                     <div>
                         <List>
-                            {this.renderShop()}
+                            {this.renderShop(shopList)}
                         </List>
                         <AddShop/>
                         <Confirm

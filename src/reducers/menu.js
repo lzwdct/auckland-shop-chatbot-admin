@@ -7,7 +7,9 @@ export default function(state = [], action){
 		case FETCH_MENU:
 			return [...action.payload];
 		case DELETE_MENU:
-			return _.filter(state, (x) => { return x.idmenu !== action.payload.menuid; });
+			return _.filter(state, (x) => { 
+				return x.idmenu !== action.payload.menu_id; 
+			});
 		case ADD_MENU:
 			return [
 				...state,

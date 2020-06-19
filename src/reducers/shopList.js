@@ -21,13 +21,14 @@ export default function (state = [], action) {
             return [...result]
         case UPDATE_SHOP_DETAIL:
             const data = action.payload;
-            return state.map((obj) => {
+            const updatedShop = state.map((obj) => {
                 if (obj.idshop === data.idshop){
                     return data;
                 }else{
                     return obj;
                 }
             })
+            return updatedShop;
         default:
             return state;
 
