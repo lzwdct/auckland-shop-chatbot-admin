@@ -8,9 +8,7 @@ import reducers from './reducers';
 
 const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
 
-ReactDOM.render(
-  <Provider store={createStoreWithMiddleware(reducers)}>
-    <App />
-  </Provider>
-  , document.querySelector('.container'));
-
+const home = () => <Provider store={createStoreWithMiddleware(reducers)}>
+<App />
+</Provider>;
+export default home;

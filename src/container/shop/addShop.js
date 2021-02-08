@@ -1,6 +1,6 @@
 import _ from 'lodash';
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { useState, useEffect, Component } from 'react';
+import { connect, useSelector, useDispatch } from 'react-redux';
 
 import { addShop, snack } from '../../actions';
 import Snack from '../../constants/Snack';
@@ -14,6 +14,71 @@ const styles = {
   }
 };
 
+const AddShop = (props) => {
+	const [shop_name, setShop_name] = useState('');
+	const [shop_addr, setShop_addr] = useState('');
+	const [shop_phone, setShop_phone] = useState('');
+
+	const menu = useSelector(state => state.menu);
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+
+	},[])
+
+	const add_shop = () => {
+		dispatch(addShop(shop_name, shop_addr, shop_phone));
+		dispatch(snack(true, '새로운 식당이 추가되었습니다.'))
+
+		setShop_name('');
+		setShop_addr('');
+		setShop_phone('');
+	}
+	const handleNameChange = (event) => {
+		setShop_name(event.target.value);
+	}
+	const handleAddrChange = (event) => {
+		setShop_addr(event.target.value);
+	}
+	const handlePhoneChange = (event) => {
+		setShop_phone(event.target.value);
+	}
+
+	return (
+		<div>
+			<input 
+				type="text" 
+				name="add_shop_text" 
+				value={shop_name} 
+				onChange={handleNameChange} 
+				style={styles.wrapper}
+				placeholder="식당 이름"
+			/>
+			<input 
+				type="text" 
+				name="add_shop_addr" 
+				value={shop_addr} 
+				onChange={handleAddrChange} 
+				style={styles.wrapper}
+				placeholder="식당 주소"
+			/>
+			<input 
+				type="text" 
+				name="add_shop_phone" 
+				value={shop_phone} 
+				onChange={handlePhoneChange} 
+				style={styles.wrapper}
+				placeholder="식당 연락처"
+			/>
+			<button label="ADD" className="btn btn-primary" onClick={(e) => add_shop(e)}>
+				ADD
+			</button>
+			<Snack />
+		</div>
+	);
+}
+
+/** 
 class AddShop extends Component{
 	constructor(props) {
 		super(props);
@@ -91,5 +156,5 @@ const mapDispatchToProps = dispatch => {
 }
 
 AddShop = connect(null, mapDispatchToProps)(AddShop)
-
+*/
 export default AddShop

@@ -1,6 +1,6 @@
 import _ from 'lodash';
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { useState, useEffect, Component } from 'react';
+import { connect, useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import { fetchMenus, deleteMenu, deleteShop, confirm } from '../../actions';
@@ -42,6 +42,49 @@ const styles = {
   }
 };
 
+const MenuList = (props) => {
+	const [id, setID] = useState(0);
+	const menu = useSelector(state => state.menu);
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		dispatch(fetchMenus(props.match.params.id));
+	},[])
+
+	const delete_menu = (id) => {
+		dispatch(confirm(true))
+		setID(id)
+	}
+	const renderPosts = () => {
+		return _.map(menu, item => {
+			return (
+				<span
+					key={item.idmenu}
+				>
+					<Food
+						onDelete={() => delete_menu(item.idmenu)}
+						label={item.menu_name}
+					/>
+				</span>
+			);
+		});
+	}
+
+	return(
+		<div>
+			{ menu.length > 0 && renderPosts()}
+			<AddMenu shop_id={props.match.params.id} />
+			<Confirm
+				submit={() => dispatch(deleteMenu(id, props.match.params.id))}
+				title="Are you sure to delete?"
+			/>
+		</div>
+	);
+}
+
+export default MenuList;
+
+/** 
 class MenuList extends Component {
 	constructor(props) {
 		super(props);
@@ -114,3 +157,4 @@ const mapDispatchToProps = dispatch => {
 MenuList = connect(mapStateToProps, mapDispatchToProps)(MenuList)
 
 export default MenuList
+*/

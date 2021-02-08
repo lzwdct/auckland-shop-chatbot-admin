@@ -5,7 +5,7 @@ import Cookies from 'universal-cookie';
 
 const cookies = new Cookies();
 
-const uri = 'https://eiivok3ma9.execute-api.ap-southeast-2.amazonaws.com/dev/graphql';
+const uri = 'https://ejll3yirxk.execute-api.ap-southeast-2.amazonaws.com/dev/graphql';
 
 let client = new ApolloClient({
     uri,
@@ -22,6 +22,10 @@ let client = new ApolloClient({
 });
 
 let token = null;
+
+export default () => {
+    return "Show page working ! ";
+}
 
 export const userLogin = (username, password) => dispatch => {
 

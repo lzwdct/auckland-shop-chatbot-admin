@@ -1,3 +1,6 @@
+export default () => {
+    return "Show page working ! ";
+}
 export const LOGIN = 'LOGIN';
 export const LOGIN_FAIL = 'LOGIN_FAIL';
 export const FETCH_SHOP = 'FETCH_SHOP';

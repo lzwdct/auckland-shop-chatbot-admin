@@ -1,7 +1,7 @@
 
 import _ from 'lodash';
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { useState, useEffect, Component } from 'react';
+import { connect, useSelector, useDispatch } from 'react-redux';
 import Snack from '../../constants/Snack';
 
 import { addNewMenu, snack } from '../../actions';
@@ -15,6 +15,45 @@ const styles = {
   }
 };
 
+const AddMenu = (props) => {
+	const [menu_name, setMenu_name] = useState('');
+	
+	const menu = useSelector(state => state.menu);
+	const dispatch = useDispatch();
+
+	const add_menus = () => {
+		dispatch(addNewMenu(props.shop_id, menu_name));
+		dispatch(snack(true, '새로운 메뉴가 추가되었습니다.'))
+		setMenu_name('');
+	}
+	const handleNameChange = (event) => {
+        event.preventDefault();
+		setMenu_name(event.target.value)
+	}
+
+	return (
+		<div>
+			<input 
+				type="text" 
+				id="add_menu_text" 
+				value={menu_name} 
+				onChange={(e) => handleNameChange(e)} 
+				onKeyPress={event => {
+					if (event.key === 'Enter') {
+						add_menus(event)
+					}
+				}}
+				style={styles.wrapper}
+			/>
+			<button label="ADD" className="btn btn-primary" onClick={(e) => add_menus(e)}>
+				ADD
+			</button>
+			<Snack />
+		</div>
+	);
+}
+
+/**
 class AddMenu extends Component{
 	constructor(props) {
 		super(props);
@@ -66,5 +105,6 @@ const mapDispatchToProps = dispatch => {
 }
 
 AddMenu = connect(null, mapDispatchToProps)(AddMenu)
+ */
 
 export default AddMenu

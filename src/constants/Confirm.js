@@ -1,5 +1,5 @@
 import React, { Component, Children } from 'react';
-import { confirm } from '../actions/';
+import { confirm } from '../actions';
 import { Dialog, DialogActions, DialogTitle, DialogContent } from '@material-ui/core';
 import { connect } from 'react-redux';
 
