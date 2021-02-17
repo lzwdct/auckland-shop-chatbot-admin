@@ -1,7 +1,13 @@
 import _ from 'lodash';
-import * as types from '../constants/ActionTypes'
+import * as types from '../constants/ActionTypes';
+import { ApplicationState } from '../constants/ActionTypes';
 import ApolloClient, { gql } from 'apollo-boost';
 import Cookies from 'universal-cookie';
+import { ActionCreator, Action, Dispatch } from "redux";
+import { ThunkAction } from "redux-thunk";
+export type AppThunk = ActionCreator<
+  ThunkAction<void, ApplicationState, null, Action<string>>
+>;
 
 const cookies = new Cookies();
 
@@ -27,7 +33,7 @@ export default () => {
     return "Show page working ! ";
 }
 
-export const userLogin = (username, password) => dispatch => {
+export const userLogin: AppThunk = (username, password) => (dispatch: Dispatch) => {
 
     const LOGIN_GQL = gql`
     mutation {
@@ -64,7 +70,8 @@ export const userLogin = (username, password) => dispatch => {
         });
     });
 }
-export const fetchShops = () => dispatch => {
+
+export const fetchShops: AppThunk = () => (dispatch: Dispatch) => {
     const FETCH_SHOP_GQL = gql`
     {
         shop{
@@ -86,7 +93,7 @@ export const fetchShops = () => dispatch => {
     })
 }
 
-export const fetchMenus = (id) => dispatch => {
+export const fetchMenus: AppThunk = (id) => (dispatch: Dispatch) => {
 
     const FETCH_MENU_GQL = gql`
     mutation{
@@ -110,7 +117,7 @@ export const fetchMenus = (id) => dispatch => {
     })
 }
 
-export const deleteMenu = (menuid, shopid) => dispatch => {
+export const deleteMenu: AppThunk = (menuid, shopid) => (dispatch: Dispatch) => {
     const DELETE_MENU_GQL = gql`
     mutation{
         deleteMenu(
@@ -133,7 +140,7 @@ export const deleteMenu = (menuid, shopid) => dispatch => {
     })
 }
 
-export const deleteShop = (shopid) => dispatch => {
+export const deleteShop: AppThunk = (shopid) => (dispatch: Dispatch) => {
     const DELETE_SHOP_GQL = gql`
     mutation{
         deleteShop(
@@ -155,7 +162,7 @@ export const deleteShop = (shopid) => dispatch => {
     })
 }
 
-export const addNewMenu = (shopid, menu_name) => dispatch => {
+export const addNewMenu: AppThunk = (shopid, menu_name) => (dispatch: Dispatch) => {
 
     const ADD_MENU_GQL = gql`
     mutation{
@@ -182,14 +189,14 @@ export const addNewMenu = (shopid, menu_name) => dispatch => {
     });
 }
 
-export const confirm = (open) => dispatch => {
+export const confirm: AppThunk = (open) => (dispatch: Dispatch) => {
     dispatch({
         type: types.CONFIRM,
         payload: open
     });
 }
 
-export const snack = (open, message) => dispatch => {
+export const snack: AppThunk = (open, message) => (dispatch: Dispatch) => {
     dispatch({
         type: types.SNACK,
         payload: {
@@ -212,7 +219,7 @@ export const snack = (open, message) => dispatch => {
     );
 }
 
-export const addShop = (shopname, shopaddr, shopphone) => dispatch => {
+export const addShop: AppThunk = (shopname, shopaddr, shopphone) => (dispatch: Dispatch) => {
     const CREATE_SHOP_GQL = gql`
     mutation{
         createShop(
@@ -241,7 +248,7 @@ export const addShop = (shopname, shopaddr, shopphone) => dispatch => {
     })
 }
 
-export const fetchShopDetail = (shopid) => dispatch => {
+export const fetchShopDetail: AppThunk = (shopid) => (dispatch: Dispatch) => {
     const FETCH_SHOP_DETAIL_GQL = gql`
     {
         shop(
@@ -266,7 +273,7 @@ export const fetchShopDetail = (shopid) => dispatch => {
     })
 }
 
-export const updateShopDetail = (shopid, shop_addr, shop_phone, shop_order) => dispatch => {
+export const updateShopDetail: AppThunk = (shopid, shop_addr, shop_phone, shop_order) => (dispatch: Dispatch) => {
     const UPDATE_SHOP_GQL = gql`
     mutation{
         updateShop(

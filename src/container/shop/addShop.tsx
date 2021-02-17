@@ -1,6 +1,8 @@
 import _ from 'lodash';
 import React, { useState, useEffect, Component } from 'react';
 import { connect, useSelector, useDispatch } from 'react-redux';
+import { ThunkDispatch } from "redux-thunk";
+import { AnyAction } from "redux";
 
 import { addShop, snack } from '../../actions';
 import Snack from '../../constants/Snack';
@@ -14,21 +16,23 @@ const styles = {
   }
 };
 
-const AddShop = (props) => {
+interface PropsFromState {
+
+}
+  
+interface propsFromDispatch {
+	addShop:(shop_name: String, shop_addr: String, shop_phone: String ) => void
+}
+
+type AllProps = PropsFromState & propsFromDispatch;
+
+const AddShop : React.FunctionComponent<AllProps> = ({ addShop }) => {
 	const [shop_name, setShop_name] = useState('');
 	const [shop_addr, setShop_addr] = useState('');
 	const [shop_phone, setShop_phone] = useState('');
 
-	const menu = useSelector(state => state.menu);
-	const dispatch = useDispatch();
-
-	useEffect(() => {
-
-	},[])
-
 	const add_shop = () => {
-		dispatch(addShop(shop_name, shop_addr, shop_phone));
-		dispatch(snack(true, '새로운 식당이 추가되었습니다.'))
+		addShop(shop_name, shop_addr, shop_phone);
 
 		setShop_name('');
 		setShop_addr('');
@@ -70,13 +74,25 @@ const AddShop = (props) => {
 				style={styles.wrapper}
 				placeholder="식당 연락처"
 			/>
-			<button label="ADD" className="btn btn-primary" onClick={(e) => add_shop(e)}>
+			<button className="btn btn-primary" onClick={(e) => add_shop(e)}>
 				ADD
 			</button>
 			<Snack />
 		</div>
 	);
 }
+
+const mapStateToProps = state => ({});
+const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AnyAction>) => {
+    return {
+        addShop: (name, addr, phone) => {
+            dispatch(addShop(name, addr, phone));
+            dispatch(snack(true, '새로운 식당이 추가되었습니다.'))
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddShop)
 
 /** 
 class AddShop extends Component{
@@ -156,5 +172,6 @@ const mapDispatchToProps = dispatch => {
 }
 
 AddShop = connect(null, mapDispatchToProps)(AddShop)
-*/
+
 export default AddShop
+*/

@@ -1,7 +1,8 @@
 import _ from 'lodash';
 import React, { useState, useEffect, useRef, Component } from 'react';
 import { connect, useSelector, useDispatch } from 'react-redux';
-
+import { ThunkDispatch } from "redux-thunk";
+import { AnyAction } from "redux";
 import { fetchShopDetail, updateShopDetail, snack } from '../../actions';
 
 import { browserHistory } from 'react-router';
@@ -14,39 +15,34 @@ const styles = {
     }
 };
 
-const EditShop = (props) => {
-    const [shopid, setShopid] = useState('');
-    const [shop_name, setShopp_name] = useState('');
-    const [shop_addr, setShop_addr] = useState('');
-    const [shop_phone, setShop_phone] = useState('');
-    const [shop_order, setShop_order] = useState('');
-    const [snack_open, setSnack_open] = useState(false);
+interface PropsFromState {
+    match : any,
+    shopDetail: []
+}
+  
+interface propsFromDispatch {
+	updateShopDetail:(id: Number, addr: String, phone:String, order:Number ) => void,
+    fetchShopDetail:(id: Number) => void
+}
+
+type AllProps = PropsFromState & propsFromDispatch;
+
+const EditShop : React.FunctionComponent<AllProps> = ({ match, shopDetail, updateShopDetail, fetchShopDetail }) => {
     const history = useHistory();
 
-    const shopDetail = useSelector(state => state.shopDetail);
+    //const shopDetail = useSelector(state => state.shopDetail);
     
-    const dispatch = useDispatch();
-
     const edit_shop_addr_REF = useRef(null);
     const edit_shop_phone_REF = useRef(null);
     const edit_shop_order_REF = useRef(null);
 
 	useEffect(() => {
-		dispatch(fetchShopDetail(props.match.params.id));
+		fetchShopDetail(match.params.id);
     },[])
     
     const edit_shop = (e) => {
         e.preventDefault();
-        dispatch(updateShopDetail(props.match.params.id, edit_shop_addr_REF.current.value, edit_shop_phone_REF.current.value, edit_shop_order_REF.current.value));
-        dispatch(snack(true, '정보가 업데이트 되었습니다.'))
-
-        /** 
-        this.props.updateShopDetail(
-            this.props.match.params.id,
-            this.edit_shop_addr.value,
-            this.edit_shop_phone.value,
-            this.edit_shop_order.value
-        );*/
+        updateShopDetail(match.params.id, edit_shop_addr_REF.current.value, edit_shop_phone_REF.current.value, edit_shop_order_REF.current.value)
     }
     const back_shop = (e) => {
         e.preventDefault();
@@ -121,6 +117,24 @@ const EditShop = (props) => {
         </div>
     );
 }
+
+const mapStateToProps = state => ({
+    shopDetail: state.shopDetail
+});
+
+const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AnyAction>) => {
+    return {
+        fetchShopDetail: (id) => {
+            dispatch(fetchShopDetail(id));
+        },
+        updateShopDetail: (id, addr, phone, order) => {
+            dispatch(updateShopDetail(id, addr, phone, order));
+            dispatch(snack(true, '정보가 업데이트 되었습니다.'))
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(EditShop)
 
 /*
 class EditShop extends Component {
@@ -243,6 +257,6 @@ const mapDispatchToProps = dispatch => {
 }
 
 EditShop = connect(mapStateToProps, mapDispatchToProps)(EditShop)
-**/
 
 export default EditShop
+**/

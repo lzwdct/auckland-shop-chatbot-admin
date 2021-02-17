@@ -1,8 +1,12 @@
 import React from 'react';
 import { Chip } from '@material-ui/core';
 
-const Food = (props) => {
-    const { onDelete, label, key } = props;
+interface FoodProps {
+    onDelete(): void;
+    label: string;
+  }
+
+const Food : React.FunctionComponent<FoodProps> = ({ onDelete, label }) => {
     return (
         <Chip
             onDelete={onDelete}
