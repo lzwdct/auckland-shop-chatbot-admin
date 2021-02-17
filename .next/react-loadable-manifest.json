@@ -81,6 +81,10 @@
       "file": "static/chunks/1.js"
     },
     {
+      "id": "./node_modules/@babel/runtime/helpers/esm/taggedTemplateLiteral.js",
+      "file": "static/chunks/1.js"
+    },
+    {
       "id": "./node_modules/@babel/runtime/helpers/esm/toArray.js",
       "file": "static/chunks/1.js"
     },
@@ -1493,14 +1497,6 @@
       "file": "static/chunks/1.js"
     },
     {
-      "id": "./node_modules/@material-ui/core/node_modules/react-is/cjs/react-is.development.js",
-      "file": "static/chunks/1.js"
-    },
-    {
-      "id": "./node_modules/@material-ui/core/node_modules/react-is/index.js",
-      "file": "static/chunks/1.js"
-    },
-    {
       "id": "./node_modules/@material-ui/styles/esm/ServerStyleSheets/ServerStyleSheets.js",
       "file": "static/chunks/1.js"
     },
@@ -1753,11 +1749,7 @@
       "file": "static/chunks/1.js"
     },
     {
-      "id": "./node_modules/@material-ui/utils/node_modules/react-is/cjs/react-is.development.js",
-      "file": "static/chunks/1.js"
-    },
-    {
-      "id": "./node_modules/@material-ui/utils/node_modules/react-is/index.js",
+      "id": "./node_modules/@wry/context/lib/context.esm.js",
       "file": "static/chunks/1.js"
     },
     {
@@ -1769,19 +1761,7 @@
       "file": "static/chunks/1.js"
     },
     {
-      "id": "./node_modules/apollo-boost/node_modules/graphql-tag/src/index.js",
-      "file": "static/chunks/1.js"
-    },
-    {
       "id": "./node_modules/apollo-cache-inmemory/lib/bundle.esm.js",
-      "file": "static/chunks/1.js"
-    },
-    {
-      "id": "./node_modules/apollo-cache-inmemory/node_modules/@wry/context/lib/context.esm.js",
-      "file": "static/chunks/1.js"
-    },
-    {
-      "id": "./node_modules/apollo-cache-inmemory/node_modules/optimism/lib/bundle.esm.js",
       "file": "static/chunks/1.js"
     },
     {
@@ -1838,6 +1818,10 @@
     },
     {
       "id": "./node_modules/fast-json-stable-stringify/index.js",
+      "file": "static/chunks/1.js"
+    },
+    {
+      "id": "./node_modules/graphql-tag/src/index.js",
       "file": "static/chunks/1.js"
     },
     {
@@ -1985,11 +1969,7 @@
       "file": "static/chunks/1.js"
     },
     {
-      "id": "./node_modules/next/dist/compiled/webpack/global.js",
-      "file": "static/chunks/1.js"
-    },
-    {
-      "id": "./node_modules/next/node_modules/@babel/runtime/helpers/esm/taggedTemplateLiteral.js",
+      "id": "./node_modules/optimism/lib/bundle.esm.js",
       "file": "static/chunks/1.js"
     },
     {
@@ -2014,6 +1994,14 @@
     },
     {
       "id": "./node_modules/prop-types/index.js",
+      "file": "static/chunks/1.js"
+    },
+    {
+      "id": "./node_modules/prop-types/node_modules/react-is/cjs/react-is.development.js",
+      "file": "static/chunks/1.js"
+    },
+    {
+      "id": "./node_modules/prop-types/node_modules/react-is/index.js",
       "file": "static/chunks/1.js"
     },
     {
@@ -2238,6 +2226,10 @@
     },
     {
       "id": "./node_modules/value-equal/esm/value-equal.js",
+      "file": "static/chunks/1.js"
+    },
+    {
+      "id": "./node_modules/webpack/buildin/global.js",
       "file": "static/chunks/1.js"
     },
     {
